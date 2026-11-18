@@ -43,4 +43,86 @@ input,textarea{width:90%;padding:10px;margin:5px;border:1px solid #ccc;border-ra
 <div class="banner">
 <h2>Big Sale - 20% Off</h2>
 <p>Sofa, Bed, Table Sab Kuch Sasta</p>
-<p
+<p>📞 03104559318 | 📧 hk6191930@gmail.com</p>
+<button onclick="document.getElementById('adminBox').scrollIntoView()">Admin Panel</button>
+</div>
+
+<div class="products" id="products"></div>
+
+<div class="box">
+<h2>📝 Apna Order Bhejein</h2>
+<input id="cname" placeholder="Apna Naam">
+<input id="cphone" placeholder="Mobile Number">
+<textarea id="cmsg" placeholder="Konsa furniture chahiye?"></textarea>
+<br>
+<button class="admin-btn" onclick="sendOrder()">WhatsApp Par Order Karein</button>
+</div>
+
+<div class="box" id="adminBox">
+<h3>Admin - Naya Product Add Karein</h3>
+<input id="pname" placeholder="Product Naam - misal: Modern Sofa">
+<input id="pprice" placeholder="Price - misal: 32500">
+<input id="pimg" placeholder="Image Link paste karein">
+<input id="pdesc" placeholder="Detail - misal: Sheesham lakri">
+<input id="pcat" placeholder="Category - Sofa / Bed / Chair">
+<br>
+<button class="admin-btn" onclick="addProduct()">Product Add Karein</button>
+<p style="font-size:12px;color:gray">Admin se add hoga to sab customers ko nazar aayega</p>
+</div>
+
+<div class="footer">
+<p>Sasta Furniture - Okara, Punjab</p>
+<p>Contact: 03104559318 | hk6191930@gmail.com</p>
+</div>
+
+<script>
+const DB = "https://sasta-furniture-275f4-default-rtdb.firebaseio.com/products.json";
+let allProducts = [];
+let cart = [];
+let currentCat = "All";
+const defaultProducts = [
+{name:"Modern Sofa", price:"32500", img:"https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400", desc:"Naram aur mazboot sofa", cat:"Sofa"},
+{name:"Wooden Bed", price:"45000", img:"https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=400", desc:"Sheesham lakri ka bed", cat:"Bed"},
+{name:"Dining Table", price:"22000", img:"https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?w=400", desc:"6 kursi wali table", cat:"Chair"},
+{name:"Ergonomic Chair", price:"8500", img:"https://images.unsplash.com/photo-1592078615290-033ee584e267?w=400", desc:"Aram deh kursi", cat:"Chair"}
+];
+async function load(){
+  let r = await fetch(DB);
+  let d = await r.json();
+  if(d){ allProducts = Object.values(d); } else { allProducts = defaultProducts; }
+  showProducts();
+}
+function showProducts(){
+  let list = allProducts;
+  if(currentCat!="All"){ list = list.filter(p => (p.cat||"").toLowerCase().includes(currentCat.toLowerCase())); }
+  if(list.length==0) list = allProducts;
+  let html = "";
+  list.forEach((p,i)=>{
+    html += `<div class="card"><img src="${p.img}"><h3>${p.name}</h3><p>${p.desc||''}</p><p><b>PKR ${p.price}</b></p><button onclick="addToCart(${i})">Add To Cart</button><br><button class="wa" onclick="window.open('https://wa.me/923104559318?text=Mujhe ${p.name} chahiye Rs ${p.price}')">WhatsApp Order</button></div>`;
+  });
+  document.getElementById("products").innerHTML = html;
+}
+function filterCat(c){ currentCat=c; showProducts(); }
+function addToCart(i){ cart.push(allProducts[i]); document.getElementById("cartCount").innerText = cart.length; alert("Cart me add ho gaya!"); }
+function showCart(){ if(cart.length==0){alert("Cart khali hai");return;} let t="Mera Order:\n"; cart.forEach(p=>{t+=p.name+" - Rs "+p.price+"\n";}); window.open("https://wa.me/923104559318?text="+encodeURIComponent(t)); }
+async function addProduct(){
+  let name=document.getElementById("pname").value;
+  let price=document.getElementById("pprice").value;
+  let img=document.getElementById("pimg").value;
+  let desc=document.getElementById("pdesc").value;
+  let cat=document.getElementById("pcat").value || "Sofa";
+  if(!name||!price||!img){alert("Naam, Price aur Image Link zaroori hai");return;}
+  await fetch(DB,{method:"POST",body:JSON.stringify({name,price,img,desc,cat})});
+  alert("Product Add Ho Gaya!");
+  load();
+}
+function sendOrder(){
+  let n=document.getElementById("cname").value;
+  let ph=document.getElementById("cphone").value;
+  let m=document.getElementById("cmsg").value;
+  window.open("https://wa.me/923104559318?text="+encodeURIComponent("Naam:"+n+" Phone:"+ph+" Order:"+m));
+}
+load();
+</script>
+</body>
+</html>
