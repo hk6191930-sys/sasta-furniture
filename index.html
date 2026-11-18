@@ -3,95 +3,561 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>سستا فرنیچر - اوکاڑہ</title>
+<title>
+سستا فرنیچر - اوکاڑہ
+</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
-body{background:#f2f2f2;direction:rtl}
-.header{background:#111;color:#fff;padding:14px 12px;position:sticky;top:0;z-index:100}
-.logo{font-size:24px;font-weight:900;text-align:center}
-.logo b{color:#FFD700}
-.searchbox{display:flex;background:#fff;border-radius:25px;overflow:hidden;margin-top:12px;border:2px solid #FFD700}
-.searchbox input{flex:1;padding:12px;border:0;outline:0;text-align:right}
-.searchbox button{background:#FFD700;color:#000;border:0;padding:0 16px;font-weight:900}
-.nav{display:flex;gap:8px;margin-top:12px}
-.nav button{flex:1;background:#222;color:#fff;border:1px solid #333;padding:10px;border-radius:20px;font-weight:700}
-.hero{margin:10px;background:#111;color:#fff;border-radius:16px;padding:20px;text-align:center}
-.hero h1{font-size:25px;color:#FFD700}
-.hero p{margin:8px 0;color:#ddd}
-.cats{display:flex;gap:8px;overflow:auto;padding:10px}
-.catbox{min-width:70px;background:#fff;border-radius:14px;padding:10px 6px;text-align:center}
-.catbox.active{background:#111;color:#fff}
-.controls{display:flex;gap:8px;padding:0 10px}
-.controls select{flex:1;padding:10px;border-radius:10px;border:1px solid #ddd;background:#fff}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px}
-.card{background:#fff;border-radius:16px;overflow:hidden}
-.card img{width:100%;height:160px;object-fit:cover}
-.body{padding:11px;text-align:right}
-.body h3{font-size:14px;height:38px;overflow:hidden}
-.price{font-size:19px;font-weight:900}
-.price small{color:#999;text-decoration:line-through;font-size:12px}
-.btnrow{display:flex;gap:6px;margin-top:9px}
-.btn1{flex:1;background:#111;color:#FFD700;border:0;padding:11px;border-radius:10px;font-weight:800}
-.btn2{flex:1;background:#25D366;color:#fff;border:0;padding:11px;border-radius:10px;font-weight:800}
-.bottom{position:fixed;bottom:0;left:0;right:0;background:#111;color:#fff;padding:12px;display:flex;justify-content:space-between;align-items:center}
-.bottom button{background:#FFD700;color:#000;border:0;padding:11px 16px;border-radius:20px;font-weight:900}
-.admin{padding:16px;text-align:right}
-.admin input,.admin select{width:100%;padding:13px;margin:6px 0;border:1px solid #ddd;border-radius:10px;text-align:right}
-.admin button{width:100%;background:#111;color:#FFD700;border:0;padding:14px;border-radius:12px;font-weight:900;margin-top:8px}
-.hidden{display:none}
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+font-family: Arial, sans-serif;
+}
+body {
+background: #f2f2f2;
+direction: rtl;
+}
+.header {
+background: #111;
+color: #fff;
+padding: 14px 12px;
+position: sticky;
+top: 0;
+z-index: 100;
+}
+.logo {
+font-size: 24px;
+font-weight: 900;
+text-align: center;
+}
+.logo b {
+color: #FFD700;
+}
+.searchbox {
+display: flex;
+background: #fff;
+border-radius: 25px;
+overflow: hidden;
+margin-top: 12px;
+border: 2px solid #FFD700;
+}
+.searchbox input {
+flex: 1;
+padding: 12px;
+border: 0;
+outline: 0;
+text-align: right;
+font-size: 15px;
+}
+.searchbox button {
+background: #FFD700;
+color: #000;
+border: 0;
+padding: 0 16px;
+font-weight: 900;
+}
+.nav {
+display: flex;
+gap: 8px;
+margin-top: 12px;
+}
+.nav button {
+flex: 1;
+background: #222;
+color: #fff;
+border: 1px solid #333;
+padding: 10px;
+border-radius: 20px;
+font-weight: 700;
+}
+.hero {
+margin: 10px;
+background: #111;
+color: #fff;
+border-radius: 16px;
+padding: 20px;
+text-align: center;
+}
+.hero h1 {
+font-size: 25px;
+color: #FFD700;
+}
+.hero p {
+margin: 8px 0;
+color: #ddd;
+}
+.cats {
+display: flex;
+gap: 8px;
+overflow: auto;
+padding: 10px;
+}
+.catbox {
+min-width: 75px;
+background: #fff;
+border-radius: 14px;
+padding: 10px 6px;
+text-align: center;
+font-weight: 700;
+}
+.catbox.active {
+background: #111;
+color: #fff;
+}
+.controls {
+display: flex;
+gap: 8px;
+padding: 0 10px;
+}
+.controls select {
+flex: 1;
+padding: 10px;
+border-radius: 10px;
+border: 1px solid #ddd;
+background: #fff;
+}
+.grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 10px;
+padding: 10px;
+}
+.card {
+background: #fff;
+border-radius: 16px;
+overflow: hidden;
+box-shadow: 0 3px 10px rgba(0,0,0,0.07);
+}
+.card img {
+width: 100%;
+height: 160px;
+object-fit: cover;
+}
+.body {
+padding: 11px;
+text-align: right;
+}
+.body h3 {
+font-size: 14px;
+height: 38px;
+overflow: hidden;
+line-height: 19px;
+}
+.price {
+font-size: 19px;
+font-weight: 900;
+margin-top: 5px;
+}
+.price small {
+color: #999;
+text-decoration: line-through;
+font-size: 12px;
+font-weight: 400;
+}
+.btnrow {
+display: flex;
+gap: 6px;
+margin-top: 9px;
+}
+.btn1 {
+flex: 1;
+background: #111;
+color: #FFD700;
+border: 0;
+padding: 11px;
+border-radius: 10px;
+font-weight: 800;
+}
+.btn2 {
+flex: 1;
+background: #25D366;
+color: #fff;
+border: 0;
+padding: 11px;
+border-radius: 10px;
+font-weight: 800;
+}
+.bottom {
+position: fixed;
+bottom: 0;
+left: 0;
+right: 0;
+background: #111;
+color: #fff;
+padding: 12px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+.bottom button {
+background: #FFD700;
+color: #000;
+border: 0;
+padding: 11px 16px;
+border-radius: 20px;
+font-weight: 900;
+}
+.admin {
+padding: 16px;
+text-align: right;
+}
+.admin input,
+.admin select {
+width: 100%;
+padding: 13px;
+margin: 6px 0;
+border: 1px solid #ddd;
+border-radius: 10px;
+text-align: right;
+}
+.admin button {
+width: 100%;
+background: #111;
+color: #FFD700;
+border: 0;
+padding: 14px;
+border-radius: 12px;
+font-weight: 900;
+margin-top: 8px;
+}
+.hidden {
+display: none;
+}
 </style>
 </head>
 <body>
+
 <div class="header">
-<div class="logo">سستا <b>فرنیچر</b> 🛋️</div>
-<div class="searchbox"><input id="search" placeholder="صوفہ، بیڈ، ٹیبل لکھیں..." oninput="render()"><button onclick="render()">تلاش</button></div>
-<div class="nav"><button onclick="showShop()">🏠 دکان</button><button onclick="askCode()">🔐 ایڈمن</button><button onclick="openCart()">🛒 کارٹ (<span id="cartCount">0</span>)</button></div>
+<div class="logo">
+سستا <b>فرنیچر</b> 🛋️
 </div>
+<div class="searchbox">
+<input
+id="search"
+placeholder="صوفہ، بیڈ، ٹیبل لکھیں..."
+oninput="render()"
+>
+<button onclick="render()">
+تلاش
+</button>
+</div>
+<div class="nav">
+<button onclick="showShop()">
+🏠 دکان
+</button>
+<button onclick="askCode()">
+🔐 ایڈمن
+</button>
+<button onclick="openCart()">
+🛒 کارٹ (<span id="cartCount">0</span>)
+</button>
+</div>
+</div>
+
 <div id="shop">
-<div class="hero"><h1>🔥 مہا سیل - 60% تک چھوٹ</h1><p>اوکاڑہ کا اپنا دراز - گھر بیٹھے آرڈر کریں</p></div>
-<div class="cats" id="cats"></div>
-<div class="controls"><select id="sort" onchange="render()"><option value="">سب سے پہلے نیا</option><option value="low">سستا پہلے</option><option value="high">مہنگا پہلے</option></select><select id="cityFilter" onchange="render()"><option value="">سارا پاکستان</option><option>اوکاڑہ</option><option>لاہور</option><option>ساہیوال</option></select></div>
-<div class="grid" id="grid"></div>
-<div style="padding:0 10px 90px;text-align:center;color:#888">سستا فرنیچر - اوکاڑہ | واٹس ایپ: 0300-1234567</div>
+<div class="hero">
+<h1>
+🔥 مہا سیل - 60% تک چھوٹ
+</h1>
+<p>
+اوکاڑہ کا اپنا دراز - گھر بیٹھے آرڈر کریں
+</p>
 </div>
+<div class="cats" id="cats">
+</div>
+<div class="controls">
+<select id="sort" onchange="render()">
+<option value="">سب سے پہلے نیا</option>
+<option value="low">سستا پہلے</option>
+<option value="high">مہنگا پہلے</option>
+</select>
+<select id="cityFilter" onchange="render()">
+<option value="">سارا پاکستان</option>
+<option>اوکاڑہ</option>
+<option>لاہور</option>
+<option>ساہیوال</option>
+</select>
+</div>
+<div class="grid" id="grid">
+</div>
+<div style="padding:0 10px 90px;text-align:center;color:#888">
+سستا فرنیچر - اوکاڑہ
+<br>
+واٹس ایپ: 0300-1234567
+</div>
+</div>
+
 <div id="adminPage" class="admin hidden">
-<h2>🔐 ایڈمن پینل</h2>
+<h2>
+🔐 ایڈمن پینل
+</h2>
 <input id="pName" placeholder="نام - مثال: نیا صوفہ">
 <input id="pPrice" type="number" placeholder="قیمت - 45000">
 <input id="pOld" type="number" placeholder="پرانی قیمت - 90000">
 <input id="pImg" placeholder="تصویر کا لنک">
-<select id="pCat"><option>صوفہ</option><option>بیڈ</option><option>ٹیبل</option><option>کرسی</option><option>الماری</option></select>
+<select id="pCat">
+<option>صوفہ</option>
+<option>بیڈ</option>
+<option>ٹیبل</option>
+<option>کرسی</option>
+<option>الماری</option>
+</select>
 <input id="pCity" placeholder="شہر - اوکاڑہ">
-<button onclick="addProduct()">✅ سامان لگائیں</button>
-<div id="adminList"></div>
-<button onclick="showShop()" style="background:#555;color:#fff">واپس دکان پر جائیں</button>
+<button onclick="addProduct()">
+✅ سامان لگائیں
+</button>
+<div id="adminList">
 </div>
-<div class="bottom"><span id="cartText">🛒 کارٹ خالی ہے</span><button onclick="orderWhatsApp()">واٹس ایپ آرڈر</button></div>
+<button onclick="showShop()" style="background:#555;color:#fff">
+واپس دکان پر جائیں
+</button>
+</div>
+
+<div class="bottom">
+<span id="cartText">
+🛒 کارٹ خالی ہے
+</span>
+<button onclick="orderWhatsApp()">
+واٹس ایپ آرڈر
+</button>
+</div>
+
 <script>
-let products=[
-{name:"نیا ایل شیپ صوفہ",price:48000,old:110000,cat:"صوفہ",city:"اوکاڑہ",img:"https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=700"},
-{name:"شاہی ڈبل بیڈ",price:72000,old:145000,cat:"بیڈ",city:"اوکاڑہ",img:"https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=700"},
-{name:"ڈائننگ ٹیبل",price:32000,old:60000,cat:"ٹیبل",city:"لاہور",img:"https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?w=700"},
-{name:"آرام دہ کرسی",price:9500,old:18000,cat:"کرسی",city:"اوکاڑہ",img:"https://images.unsplash.com/photo-1592078615290-033ee584e267?w=700"},
-{name:"الماری 3 دروازے",price:58000,old:105000,cat:"الماری",city:"ساہیوال",img:"https://images.unsplash.com/photo-1558997519-83ea9252edf4?w=700"}
-];
-let activeCat="سب",cart=[];
-let cats=["سب","صوفہ","بیڈ","ٹیبل","کرسی","الماری"];
-function drawCats(){document.getElementById("cats").innerHTML=cats.map(c=>`<div class="catbox ${c===activeCat?'active':''}" onclick="setCat('${c}')"><p>${c}</p></div>`).join("");}
-function setCat(c){activeCat=c;drawCats();render();}
-function render(){
-let q=document.getElementById("search").value;
-let s=document.getElementById("sort").value;
-let city=document.getElementById("cityFilter").value;
-let list=products.filter(p=>(activeCat==="سب"||p.cat===activeCat)&&(p.name.includes(q))&&(!city||p.city===city));
-if(s==="low")list.sort((a,b)=>a.price-b.price);
-if(s==="high")list.sort((a,b)=>b.price-a.price);
-document.getElementById("grid").innerHTML=list.map(p=>{
-let idx=products.indexOf(p);
-let off=Math.round((1-p.price/p.old)*100);
-return `<div class="card"><img src="${p.img}"><div class="body"><h3>${p.name}</h3><div>🔥 ${off}% چھوٹ • ${p.city}</div><div class="price">Rs.${p.price.toLocaleString()} <small>Rs.${p.old.toLocaleString()}</small></div><div class="btnrow"><button class="btn1" onclick="addToCart(${idx})">+ کارٹ</button><button class="btn2" onclick="buyOne('${p.name}',${p.price})">واٹس ایپ</button></div></div></div>`;
-}).join("");
-document.getElementById("adminList").innerHTML=products.map((p,i)=>`<div style="background:#fff;padding:10px;border-radius:10px;margin:8px 0;display:flex;justify-content:space-between"><span>${p.name}</span><button onclick="delProduct(${i})" style="background:red;color:#fff;border:0;padding:6px 10px;border-radius:8px">ڈیلیٹ</button></div>`).join("");
+let products = [
+{
+name: "نیا ایل شیپ صوفہ",
+price: 48000,
+old: 110000,
+cat: "صوفہ",
+city: "اوکاڑہ",
+img: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=700"
+},
+{
+name: "شاہی ڈبل بیڈ",
+price: 72000,
+old: 145000,
+cat: "بیڈ",
+city: "اوکاڑہ",
+img: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=700"
+},
+{
+name: "ڈائننگ ٹیبل",
+price: 32000,
+old: 60000,
+cat: "ٹیبل",
+city: "لاہور",
+img: "https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?w=700"
+},
+{
+name: "آرام دہ کرسی",
+price: 9500,
+old: 18000,
+cat: "کرسی",
+city: "اوکاڑہ",
+img: "https://images.unsplash.com/photo-1592078615290-033ee584e267?w=700"
+},
+{
+name: "الماری 3 دروازے",
+price: 58000,
+old: 105000,
+cat: "الماری",
+city: "ساہیوال",
+img: "https://images.unsplash.com/photo-1558997519-83ea9252edf4?w=700"
 }
-function addToCart(i){cart.push(products[i]);updateCart();}
-function updateCart(){document.getElementById("cartCount").innerText=cart.length;let t=cart.reduce((a,b)=>a+b.price,0);document.getElementById("cartText").innerText=cart.length?`🛒
+];
+
+let activeCat = "سب";
+let cart = [];
+let cats = ["سب", "صوفہ", "بیڈ", "ٹیبل", "کرسی", "الماری"];
+
+function drawCats() {
+let html = "";
+for (let i = 0; i < cats.length; i++) {
+let c = cats[i];
+let cls = "";
+if (c === activeCat) {
+cls = "active";
+}
+html += '<div class="catbox ' + cls + '" onclick="setCat(\'' + c + '\')"><p>' + c + '</p></div>';
+}
+document.getElementById("cats").innerHTML = html;
+}
+
+function setCat(c) {
+activeCat = c;
+drawCats();
+render();
+}
+
+function render() {
+let q = document.getElementById("search").value;
+let s = document.getElementById("sort").value;
+let city = document.getElementById("cityFilter").value;
+let list = [];
+for (let i = 0; i < products.length; i++) {
+let p = products[i];
+let catOk = false;
+if (activeCat === "سب") {
+catOk = true;
+}
+if (p.cat === activeCat) {
+catOk = true;
+}
+let searchOk = p.name.includes(q);
+let cityOk = true;
+if (city !== "") {
+if (p.city !== city) {
+cityOk = false;
+}
+}
+if (catOk && searchOk && cityOk) {
+list.push(p);
+}
+}
+if (s === "low") {
+list.sort(function(a, b) { return a.price - b.price; });
+}
+if (s === "high") {
+list.sort(function(a, b) { return b.price - a.price; });
+}
+let gridHtml = "";
+for (let i = 0; i < list.length; i++) {
+let p = list[i];
+let idx = products.indexOf(p);
+let off = Math.round((1 - p.price / p.old) * 100);
+gridHtml += '<div class="card">';
+gridHtml += '<img src="' + p.img + '">';
+gridHtml += '<div class="body">';
+gridHtml += '<h3>' + p.name + '</h3>';
+gridHtml += '<div>🔥 ' + off + '% چھوٹ • ' + p.city + '</div>';
+gridHtml += '<div class="price">Rs.' + p.price + ' <small>Rs.' + p.old + '</small></div>';
+gridHtml += '<div class="btnrow">';
+gridHtml += '<button class="btn1" onclick="addToCart(' + idx + ')">+ کارٹ</button>';
+gridHtml += '<button class="btn2" onclick="buyOne(\'' + p.name + '\',' + p.price + ')">واٹس ایپ</button>';
+gridHtml += '</div>';
+gridHtml += '</div>';
+gridHtml += '</div>';
+}
+if (gridHtml === "") {
+gridHtml = "<p style='grid-column:span 2;text-align:center;padding:25px'>کوئی سامان نہیں ملا</p>";
+}
+document.getElementById("grid").innerHTML = gridHtml;
+let adminHtml = "";
+for (let i = 0; i < products.length; i++) {
+adminHtml += '<div style="background:#fff;padding:10px;border-radius:10px;margin:8px 0;display:flex;justify-content:space-between">';
+adminHtml += '<span>' + products[i].name + '</span>';
+adminHtml += '<button onclick="delProduct(' + i + ')" style="background:red;color:#fff;border:0;padding:6px 10px;border-radius:8px">ڈیلیٹ</button>';
+adminHtml += '</div>';
+}
+document.getElementById("adminList").innerHTML = adminHtml;
+}
+
+function addToCart(i) {
+cart.push(products[i]);
+updateCart();
+}
+
+function updateCart() {
+document.getElementById("cartCount").innerText = cart.length;
+let total = 0;
+for (let i = 0; i < cart.length; i++) {
+total = total + cart[i].price;
+}
+if (cart.length > 0) {
+document.getElementById("cartText").innerText = "🛒 " + cart.length + " چیزیں - Rs." + total;
+} else {
+document.getElementById("cartText").innerText = "🛒 کارٹ خالی ہے";
+}
+}
+
+function openCart() {
+if (cart.length === 0) {
+alert("کارٹ خالی ہے");
+return;
+}
+let msg = "";
+for (let i = 0; i < cart.length; i++) {
+msg += cart[i].name + " - Rs." + cart[i].price + "\n";
+}
+alert(msg);
+}
+
+function buyOne(n, p) {
+let text = "مجھے یہ چاہیے: " + n + " - Rs." + p;
+window.open("https://wa.me/923001234567?text=" + encodeURIComponent(text), "_blank");
+}
+
+function orderWhatsApp() {
+if (cart.length === 0) {
+alert("پہلے کارٹ میں کچھ ڈالیں");
+return;
+}
+let m = "نیا آرڈر:\n";
+for (let i = 0; i < cart.length; i++) {
+m += cart[i].name + " - Rs." + cart[i].price + "\n";
+}
+window.open("https://wa.me/923001234567?text=" + encodeURIComponent(m), "_blank");
+}
+
+function askCode() {
+let c = prompt("ایڈمن کوڈ لکھیں:");
+if (c === "Asdfghjkl@Asdfghjkl@#") {
+document.getElementById("shop").classList.add("hidden");
+document.getElementById("adminPage").classList.remove("hidden");
+} else {
+if (c !== null) {
+alert("غلط کوڈ ہے!");
+}
+}
+}
+
+function showShop() {
+document.getElementById("shop").classList.remove("hidden");
+document.getElementById("adminPage").classList.add("hidden");
+}
+
+function addProduct() {
+let n = document.getElementById("pName").value;
+let p = document.getElementById("pPrice").value;
+if (n === "" || p === "") {
+alert("نام اور قیمت لکھیں");
+return;
+}
+let oldVal = document.getElementById("pOld").value;
+if (oldVal === "") {
+oldVal = p * 2;
+}
+let imgVal = document.getElementById("pImg").value;
+if (imgVal === "") {
+imgVal = "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=700";
+}
+let cityVal = document.getElementById("pCity").value;
+if (cityVal === "") {
+cityVal = "اوکاڑہ";
+}
+let newP = {
+name: n,
+price: Number(p),
+old: Number(oldVal),
+cat: document.getElementById("pCat").value,
+city: cityVal,
+img: imgVal
+};
+products.unshift(newP);
+alert("ہو گیا!");
+showShop();
+render();
+}
+
+function delProduct(i) {
+if (confirm("ڈیلیٹ کرنا ہے؟")) {
+products.splice(i, 1);
+render();
+}
+}
+
+drawCats();
+render();
+</script>
+</body>
+</html>
