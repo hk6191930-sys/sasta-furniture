@@ -1,52 +1,46 @@
 <!DOCTYPE html>
-<html>
+<html lang="ur">
 <head>
-<title>Sasta Furniture Okara</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sasta Furniture - Okara</title>
 <style>
-body{font-family:Arial;text-align:center;background:#f5f5f5;margin:0}
-.header{background:#2e7d32;color:white;padding:25px}
-.box{background:white;margin:15px;padding:15px;border-radius:10px}
-.price{color:green;font-size:22px;font-weight:bold}
-.btn{display:block;background:#25D366;color:white;padding:15px;margin:10px;border-radius:10px;text-decoration:none;font-size:20px;font-weight:bold}
-.btn2{display:block;background:#2e7d32;color:white;padding:15px;margin:10px;border-radius:10px;text-decoration:none;font-size:20px;font-weight:bold}
+body{font-family:Arial; margin:0; background:#FFF8F0;}
+.header{background:#8B5E3C; color:white; padding:15px; text-align:center;}
+.header h1{margin:0;}
+.header p{margin:5px;}
+.menu{display:flex; justify-content:space-around; background:#D2B48C; padding:10px;}
+.menu a{text-decoration:none; color:#4A2C0A; font-weight:bold;}
+.banner{background:#F5E6D3; padding:20px; text-align:center;}
+.banner h2{color:#4A2C0A;}
+.products{display:grid; grid-template-columns:1fr 1fr; gap:10px; padding:10px;}
+.card{background:white; border-radius:10px; padding:10px; text-align:center; box-shadow:0 2px 5px #ccc;}
+.card img{width:100%; border-radius:10px; height:140px; object-fit:cover;}
+.card button{background:#8B5E3C; color:white; border:none; padding:8px 15px; border-radius:5px; margin:3px; width:90%;}
+.card .wa{background:#25D366;}
+.footer{background:#4A2C0A; color:white; text-align:center; padding:10px; margin-top:10px;}
+.admin-btn{background:green; color:white; padding:10px; border:none; border-radius:5px; margin:10px;}
+.box{background:white;margin:10px;padding:15px;border-radius:10px;box-shadow:0 2px 5px #ccc;text-align:center}
+input,textarea{width:90%;padding:10px;margin:5px;border:1px solid #ccc;border-radius:8px}
 </style>
 </head>
 <body>
+
 <div class="header">
-<h1>Sasta Furniture Okara</h1>
-<p>Sasta Aur Acha Furniture - Home Delivery</p>
-<p>Okara, Pakistan</p>
+<h1>Sasta Furniture</h1>
+<p>Okara - Sasta Aur Acha Furniture</p>
+<p>Admin: Hamza - 03104559318</p>
 </div>
 
-<div class="box">
-<h2>🛏️ Double Bed</h2>
-<p>Mazboot Lakri Wala Bed</p>
-<p class="price">Rs 35,000</p>
+<div class="menu">
+<a href="#">Home</a>
+<a href="#" onclick="filterCat('Sofa')">Sofa</a>
+<a href="#" onclick="filterCat('Bed')">Bed</a>
+<a href="#" onclick="filterCat('Chair')">Chair</a>
+<a href="#" onclick="showCart()">Cart (<span id="cartCount">0</span>)</a>
 </div>
 
-<div class="box">
-<h2>🛋️ Sofa Set 5 Seater</h2>
-<p>Naram Aur Mazboot Sofa</p>
-<p class="price">Rs 45,000</p>
-</div>
-
-<div class="box">
-<h2>🪑 Dining Table 6 Kursi</h2>
-<p>Family Ke Liye Best</p>
-<p class="price">Rs 28,000</p>
-</div>
-
-<div class="box">
-<h2>🗄️ Almari</h2>
-<p>Bari Aur Mazboot Almari</p>
-<p class="price">Rs 30,000</p>
-</div>
-
-<a class="btn" href="https://wa.me/923001234567">WhatsApp Par Order Karain</a>
-<a class="btn2" href="tel:03001234567">Call Karain</a>
-<p>Cash On Delivery Available</p>
-
-</div>
-</body>
-</html>
+<div class="banner">
+<h2>Big Sale - 20% Off</h2>
+<p>Sofa, Bed, Table Sab Kuch Sasta</p>
+<p
