@@ -3,115 +3,95 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sasta Furniture - Daraz Jaisa Sasta Bazar</title>
+<title>سستا فرنیچر - اوکاڑہ</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
-body{background:#f5f5f5}
-.top{background:#f57224;color:#fff;padding:10px 12px;position:sticky;top:0;z-index:99}
-.logo{font-size:22px;font-weight:900}
-.logo span{color:#ffe600}
-.search{display:flex;margin-top:10px;background:#fff;border-radius:8px;overflow:hidden}
-.search input{flex:1;padding:12px;border:0;outline:0;font-size:15px}
-.search button{background:#1a1a1a;color:#fff;border:0;padding:0 18px;font-weight:700}
-.cat{display:flex;gap:8px;overflow:auto;padding:10px;background:#fff;white-space:nowrap}
-.cat button{border:1px solid #ddd;background:#fff;padding:8px 14px;border-radius:20px;font-weight:700;cursor:pointer}
-.cat button.active{background:#f57224;color:#fff;border-color:#f57224}
-.banner{background:linear-gradient(90deg,#f57224,#ff9a3d);color:#fff;margin:10px;border-radius:12px;padding:18px}
-.banner h2{font-size:24px}
-.banner p{margin:6px 0 12px;opacity:.9}
-.banner b{background:#fff;color:#f57224;padding:8px 14px;border-radius:20px;display:inline-block}
-.filter{display:flex;gap:8px;padding:0 10px;overflow:auto}
-.filter select{padding:8px;border-radius:8px;border:1px solid #ddd;background:#fff}
+body{background:#f2f2f2;direction:rtl}
+.header{background:#111;color:#fff;padding:14px 12px;position:sticky;top:0;z-index:100}
+.logo{font-size:24px;font-weight:900;text-align:center}
+.logo b{color:#FFD700}
+.searchbox{display:flex;background:#fff;border-radius:25px;overflow:hidden;margin-top:12px;border:2px solid #FFD700}
+.searchbox input{flex:1;padding:12px;border:0;outline:0;text-align:right}
+.searchbox button{background:#FFD700;color:#000;border:0;padding:0 16px;font-weight:900}
+.nav{display:flex;gap:8px;margin-top:12px}
+.nav button{flex:1;background:#222;color:#fff;border:1px solid #333;padding:10px;border-radius:20px;font-weight:700}
+.hero{margin:10px;background:#111;color:#fff;border-radius:16px;padding:20px;text-align:center}
+.hero h1{font-size:25px;color:#FFD700}
+.hero p{margin:8px 0;color:#ddd}
+.cats{display:flex;gap:8px;overflow:auto;padding:10px}
+.catbox{min-width:70px;background:#fff;border-radius:14px;padding:10px 6px;text-align:center}
+.catbox.active{background:#111;color:#fff}
+.controls{display:flex;gap:8px;padding:0 10px}
+.controls select{flex:1;padding:10px;border-radius:10px;border:1px solid #ddd;background:#fff}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px}
-.card{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.08)}
-.card img{width:100%;height:150px;object-fit:cover}
-.card-body{padding:10px}
-.card-body h3{font-size:14px;height:36px;overflow:hidden}
-.price{color:#f57224;font-weight:900;font-size:18px;margin:6px 0}
-.old{color:#999;text-decoration:line-through;font-size:12px;margin-left:5px}
-.off{background:#ffe600;color:#000;font-size:11px;padding:2px 6px;border-radius:10px;font-weight:700}
-.btns{display:flex;gap:6px;margin-top:8px}
-.add{flex:1;background:#f57224;color:#fff;border:0;padding:10px;border-radius:8px;font-weight:800}
-.wp{flex:1;background:#25D366;color:#fff;border:0;padding:10px;border-radius:8px;font-weight:800}
-.cartbar{position:fixed;bottom:0;left:0;right:0;background:#1a1a1a;color:#fff;padding:12px;display:flex;justify-content:space-between;align-items:center}
-.cartbar button{background:#f57224;color:#fff;border:0;padding:10px 18px;border-radius:20px;font-weight:800}
-.admin{padding:15px}
-.admin input,.admin select{width:100%;padding:12px;margin:6px 0;border:1px solid #ddd;border-radius:8px}
-.admin button{width:100%;background:#f57224;color:#fff;border:0;padding:13px;border-radius:10px;font-weight:800}
+.card{background:#fff;border-radius:16px;overflow:hidden}
+.card img{width:100%;height:160px;object-fit:cover}
+.body{padding:11px;text-align:right}
+.body h3{font-size:14px;height:38px;overflow:hidden}
+.price{font-size:19px;font-weight:900}
+.price small{color:#999;text-decoration:line-through;font-size:12px}
+.btnrow{display:flex;gap:6px;margin-top:9px}
+.btn1{flex:1;background:#111;color:#FFD700;border:0;padding:11px;border-radius:10px;font-weight:800}
+.btn2{flex:1;background:#25D366;color:#fff;border:0;padding:11px;border-radius:10px;font-weight:800}
+.bottom{position:fixed;bottom:0;left:0;right:0;background:#111;color:#fff;padding:12px;display:flex;justify-content:space-between;align-items:center}
+.bottom button{background:#FFD700;color:#000;border:0;padding:11px 16px;border-radius:20px;font-weight:900}
+.admin{padding:16px;text-align:right}
+.admin input,.admin select{width:100%;padding:13px;margin:6px 0;border:1px solid #ddd;border-radius:10px;text-align:right}
+.admin button{width:100%;background:#111;color:#FFD700;border:0;padding:14px;border-radius:12px;font-weight:900;margin-top:8px}
 .hidden{display:none}
-.topnav{display:flex;gap:10px;margin-top:10px}
-.topnav button{flex:1;background:#fff;color:#000;border:0;padding:8px;border-radius:20px;font-weight:700}
 </style>
 </head>
 <body>
-<div class="top">
-<div class="logo">SASTA <span>FURNITURE</span> 🛋️</div>
-<div class="search"><input id="search" placeholder="صوفہ، بیڈ، ٹیبل تلاش کریں..." oninput="render()"><button onclick="render()">SEARCH</button></div>
-<div class="topnav"><button onclick="showShop()">🏠 دکان</button><button onclick="showAdmin()">⚙️ ایڈمن</button><button onclick="openCart()">🛒 کارٹ (<span id="cartCount">0</span>)</button></div>
+<div class="header">
+<div class="logo">سستا <b>فرنیچر</b> 🛋️</div>
+<div class="searchbox"><input id="search" placeholder="صوفہ، بیڈ، ٹیبل لکھیں..." oninput="render()"><button onclick="render()">تلاش</button></div>
+<div class="nav"><button onclick="showShop()">🏠 دکان</button><button onclick="askCode()">🔐 ایڈمن</button><button onclick="openCart()">🛒 کارٹ (<span id="cartCount">0</span>)</button></div>
 </div>
-
 <div id="shop">
-<div class="cat" id="cats"></div>
-<div class="banner"><h2>🔥 BIG SALE - 50% OFF</h2><p>اوکاڑہ میں سب سے سستا فرنیچر - گھر بیٹھے آرڈر کریں</p><b>آج ہی آرڈر کریں</b></div>
-<div class="filter">
-<select id="sort" onchange="render()"><option value="">ترتیب: سب</option><option value="low">قیمت: کم سے زیادہ</option><option value="high">قیمت: زیادہ سے کم</option></select>
-<select id="cityFilter" onchange="render()"><option value="">سارا پاکستان</option><option>Okara</option><option>Lahore</option><option>Sahiwal</option></select>
-</div>
+<div class="hero"><h1>🔥 مہا سیل - 60% تک چھوٹ</h1><p>اوکاڑہ کا اپنا دراز - گھر بیٹھے آرڈر کریں</p></div>
+<div class="cats" id="cats"></div>
+<div class="controls"><select id="sort" onchange="render()"><option value="">سب سے پہلے نیا</option><option value="low">سستا پہلے</option><option value="high">مہنگا پہلے</option></select><select id="cityFilter" onchange="render()"><option value="">سارا پاکستان</option><option>اوکاڑہ</option><option>لاہور</option><option>ساہیوال</option></select></div>
 <div class="grid" id="grid"></div>
-<div style="padding:0 10px 80px;text-align:center;color:#888">Sasta Furniture - Okara | WhatsApp: 0300-1234567</div>
+<div style="padding:0 10px 90px;text-align:center;color:#888">سستا فرنیچر - اوکاڑہ | واٹس ایپ: 0300-1234567</div>
 </div>
-
 <div id="adminPage" class="admin hidden">
-<h2>ایڈمن - نیا پروڈکٹ لگائیں</h2>
-<input id="pName" placeholder="نام - مثال: L Shape Sofa">
-<input id="pPrice" type="number" placeholder="قیمت - مثال: 45000">
-<input id="pOld" type="number" placeholder="پرانی قیمت - مثال: 90000">
+<h2>🔐 ایڈمن پینل</h2>
+<input id="pName" placeholder="نام - مثال: نیا صوفہ">
+<input id="pPrice" type="number" placeholder="قیمت - 45000">
+<input id="pOld" type="number" placeholder="پرانی قیمت - 90000">
 <input id="pImg" placeholder="تصویر کا لنک">
-<select id="pCat"><option>Sofa</option><option>Bed</option><option>Table</option><option>Chair</option><option>Almari</option></select>
-<input id="pCity" placeholder="شہر - Okara">
-<button onclick="addProduct()">✅ پروڈکٹ لگائیں - سب کو نظر آئے گا</button>
-<button onclick="showShop()" style="background:#333;margin-top:10px">واپس دکان پر جائیں</button>
+<select id="pCat"><option>صوفہ</option><option>بیڈ</option><option>ٹیبل</option><option>کرسی</option><option>الماری</option></select>
+<input id="pCity" placeholder="شہر - اوکاڑہ">
+<button onclick="addProduct()">✅ سامان لگائیں</button>
+<div id="adminList"></div>
+<button onclick="showShop()" style="background:#555;color:#fff">واپس دکان پر جائیں</button>
 </div>
-
-<div class="cartbar"><span id="cartText">🛒 کارٹ خالی ہے</span><button onclick="orderWhatsApp()">واٹس ایپ پر آرڈر کریں</button></div>
-
+<div class="bottom"><span id="cartText">🛒 کارٹ خالی ہے</span><button onclick="orderWhatsApp()">واٹس ایپ آرڈر</button></div>
 <script>
-const DB="https://sasta-furniture-275f4-default-rtdb.firebaseio.com/products.json";
 let products=[
-{name:"L Shape Luxury Sofa",price:45000,old:90000,cat:"Sofa",city:"Okara",img:"https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600"},
-{name:"King Size Double Bed",price:65000,old:120000,cat:"Bed",city:"Okara",img:"https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=600"},
-{name:"Wooden Dining Table",price:28000,old:50000,cat:"Table",city:"Lahore",img:"https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?w=600"},
-{name:"Comfort Chair",price:8500,old:15000,cat:"Chair",city:"Okara",img:"https://images.unsplash.com/photo-1592078615290-033ee584e267?w=600"},
-{name:"3 Door Almari",price:55000,old:95000,cat:"Almari",city:"Sahiwal",img:"https://images.unsplash.com/photo-1558997519-83ea9252edf4?w=600"},
-{name:"Office Table",price:18000,old:32000,cat:"Table",city:"Okara",img:"https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?w=600"},
+{name:"نیا ایل شیپ صوفہ",price:48000,old:110000,cat:"صوفہ",city:"اوکاڑہ",img:"https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=700"},
+{name:"شاہی ڈبل بیڈ",price:72000,old:145000,cat:"بیڈ",city:"اوکاڑہ",img:"https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=700"},
+{name:"ڈائننگ ٹیبل",price:32000,old:60000,cat:"ٹیبل",city:"لاہور",img:"https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?w=700"},
+{name:"آرام دہ کرسی",price:9500,old:18000,cat:"کرسی",city:"اوکاڑہ",img:"https://images.unsplash.com/photo-1592078615290-033ee584e267?w=700"},
+{name:"الماری 3 دروازے",price:58000,old:105000,cat:"الماری",city:"ساہیوال",img:"https://images.unsplash.com/photo-1558997519-83ea9252edf4?w=700"}
 ];
-let activeCat="سب", cart=[];
-let cats=["سب","Sofa","Bed","Table","Chair","Almari"];
-document.getElementById("cats").innerHTML=cats.map(c=>`<button class="${c===activeCat?'active':''}" onclick="setCat('${c}')">${c}</button>`).join("");
-function setCat(c){activeCat=c;document.getElementById("cats").innerHTML=cats.map(x=>`<button class="${x===activeCat?'active':''}" onclick="setCat('${x}')">${x}</button>`).join("");render();}
+let activeCat="سب",cart=[];
+let cats=["سب","صوفہ","بیڈ","ٹیبل","کرسی","الماری"];
+function drawCats(){document.getElementById("cats").innerHTML=cats.map(c=>`<div class="catbox ${c===activeCat?'active':''}" onclick="setCat('${c}')"><p>${c}</p></div>`).join("");}
+function setCat(c){activeCat=c;drawCats();render();}
 function render(){
-let q=document.getElementById("search").value.toLowerCase();
+let q=document.getElementById("search").value;
 let s=document.getElementById("sort").value;
 let city=document.getElementById("cityFilter").value;
-let list=products.filter(p=>(activeCat==="سب"||p.cat===activeCat)&&(p.name.toLowerCase().includes(q))&&(!city||p.city===city));
-if(s==="low") list.sort((a,b)=>a.price-b.price);
-if(s==="high") list.sort((a,b)=>b.price-a.price);
-document.getElementById("grid").innerHTML=list.map((p,i)=>`
-<div class="card">
-<img src="${p.img}">
-<div class="card-body"><h3>${p.name}</h3><div><span class="price">Rs.${p.price.toLocaleString()}</span><span class="old">Rs.${p.old.toLocaleString()}</span></div><span class="off">-${Math.round((1-p.price/p.old)*100)}% OFF • ${p.city}</span>
-<div class="btns"><button class="add" onclick="addToCart(${products.indexOf(p)})">+ کارٹ</button><button class="wp" onclick="buyOne('${p.name}',${p.price})">واٹس ایپ</button></div></div></div>`).join("")||"<p style='grid-column:span 2;text-align:center;padding:20px'>کوئی پروڈکٹ نہیں ملا</p>";
+let list=products.filter(p=>(activeCat==="سب"||p.cat===activeCat)&&(p.name.includes(q))&&(!city||p.city===city));
+if(s==="low")list.sort((a,b)=>a.price-b.price);
+if(s==="high")list.sort((a,b)=>b.price-a.price);
+document.getElementById("grid").innerHTML=list.map(p=>{
+let idx=products.indexOf(p);
+let off=Math.round((1-p.price/p.old)*100);
+return `<div class="card"><img src="${p.img}"><div class="body"><h3>${p.name}</h3><div>🔥 ${off}% چھوٹ • ${p.city}</div><div class="price">Rs.${p.price.toLocaleString()} <small>Rs.${p.old.toLocaleString()}</small></div><div class="btnrow"><button class="btn1" onclick="addToCart(${idx})">+ کارٹ</button><button class="btn2" onclick="buyOne('${p.name}',${p.price})">واٹس ایپ</button></div></div></div>`;
+}).join("");
+document.getElementById("adminList").innerHTML=products.map((p,i)=>`<div style="background:#fff;padding:10px;border-radius:10px;margin:8px 0;display:flex;justify-content:space-between"><span>${p.name}</span><button onclick="delProduct(${i})" style="background:red;color:#fff;border:0;padding:6px 10px;border-radius:8px">ڈیلیٹ</button></div>`).join("");
 }
 function addToCart(i){cart.push(products[i]);updateCart();}
-function updateCart(){document.getElementById("cartCount").innerText=cart.length;let total=cart.reduce((a,b)=>a+b.price,0);document.getElementById("cartText").innerText=cart.length?`🛒 ${cart.length} چیزیں - Rs.${total.toLocaleString()}`:"🛒 کارٹ خالی ہے";}
-function openCart(){if(!cart.length) return alert("کارٹ خالی ہے");alert(cart.map(c=>c.name+" - Rs."+c.price).join("\n"));}
-function buyOne(n,p){window.open("https://wa.me/923001234567?text="+encodeURIComponent("مجھے یہ چاہیے: "+n+" - Rs."+p)," _blank");}
-function orderWhatsApp(){if(!cart.length) return alert("پہلے کارٹ میں کچھ ڈالیں");let msg="نیا آرڈر Sasta Furniture:\n"+cart.map(c=>c.name+" - Rs."+c.price).join("\n");window.open("https://wa.me/923001234567?text="+encodeURIComponent(msg),"_blank");}
-function showAdmin(){document.getElementById("shop").classList.add("hidden");document.getElementById("adminPage").classList.remove("hidden");}
-function showShop(){document.getElementById("shop").classList.remove("hidden");document.getElementById("adminPage").classList.add("hidden");}
-function addProduct(){let n=document.getElementById("pName").value,p=document.getElementById("pPrice").value;if(!n||!p) return alert("نام اور قیمت لکھیں");products.unshift({name:n,price:+p,old:+document.getElementById("pOld").value||+p*2,cat:document.getElementById("pCat").value,city:document.getElementById("pCity").value||"Okara",img:document.getElementById("pImg").value||"https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600"});fetch(DB,{method:"POST",body:JSON.stringify(products[0])});alert("ہو گیا! سب کسٹمر کو نظر آئے گا");showShop();render();}
-fetch(DB).then(r=>r.json()).then(d=>{if(d){let arr=Object.values(d);if(arr.length) products=arr;render();}});
-render();
-</script>
-</body>
-</html>
+function updateCart(){document.getElementById("cartCount").innerText=cart.length;let t=cart.reduce((a,b)=>a+b.price,0);document.getElementById("cartText").innerText=cart.length?`🛒
