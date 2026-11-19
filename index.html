@@ -1,104 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ur">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sasta Furniture - Okara's No.1 Online Store</title>
+<title>Sasta Furniture - Dera Ghazi Khan</title>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
-body{background:#f4f4f4;padding-bottom:90px}
-.header{background:#111;color:#fff;padding:14px 12px;position:sticky;top:0;z-index:100}
-.logo{font-size:24px;font-weight:900;text-align:center}
-.logo b{color:#FFD700}
-.logo small{display:block;font-size:11px;color:#ccc;font-weight:400}
-.searchbox{display:flex;background:#fff;border-radius:25px;overflow:hidden;margin-top:12px;border:2px solid #FFD700}
-.searchbox input{flex:1;padding:12px;border:0;outline:0;font-size:15px}
-.searchbox button{background:#FFD700;color:#000;border:0;padding:0 16px;font-weight:900}
-.hero{margin:10px;background:#111;color:#fff;border-radius:18px;padding:22px 16px;text-align:center}
-.hero h1{font-size:26px;color:#FFD700}
-.hero p{margin:10px 0;color:#ddd}
-.features{display:flex;gap:8px;padding:0 10px}
-.feature-box{flex:1;background:#fff;border-radius:12px;padding:10px 6px;text-align:center;font-size:11px;font-weight:700}
-.cats{display:flex;gap:10px;overflow:auto;padding:10px}
-.catbox{min-width:78px;background:#fff;border-radius:16px;padding:12px 6px;text-align:center;font-weight:700}
-.catbox.active{background:#111;color:#fff}
-.controls{display:flex;gap:8px;padding:0 10px}
-.controls select{flex:1;padding:11px;border-radius:12px;border:1px solid #ddd;background:#fff}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px}
-.card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 3px 12px rgba(0,0,0,0.07);position:relative}
-.card img{width:100%;height:165px;object-fit:cover}
-.badge-off{position:absolute;top:8px;left:8px;background:#FFD700;color:#000;font-size:11px;font-weight:900;padding:4px 8px;border-radius:20px}
-.body{padding:11px}
-.body h3{font-size:14px;height:38px;overflow:hidden;line-height:19px}
-.stars{color:#FFA500;font-size:12px;margin:4px 0}
-.price{font-size:19px;font-weight:900;margin-top:5px}
-.price small{color:#999;text-decoration:line-through;font-size:12px}
-.btnrow{display:flex;gap:6px;margin-top:9px}
-.btn1{flex:1;background:#111;color:#FFD700;border:0;padding:11px;border-radius:10px;font-weight:800}
-.btn2{flex:1;background:#25D366;color:#fff;border:0;padding:11px;border-radius:10px;font-weight:800}
-.detail-btn{width:100%;background:#f8f8f8;border:0;padding:9px;border-radius:9px;margin-top:7px;font-weight:700}
-.bottomnav{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;border-top:1px solid #ddd;z-index:200}
-.bottomnav button{flex:1;background:#fff;border:0;padding:9px 2px;font-size:11px;font-weight:700;color:#666}
-.bottomnav button.active{color:#000;background:#FFD700}
-.bottomnav span{display:block;font-size:21px}
-.admin{padding:16px}
-.admin-card{background:#fff;border-radius:14px;padding:14px;margin-bottom:12px}
-.admin input,.admin select,.admin textarea{width:100%;padding:13px;margin:6px 0;border:1px solid #ddd;border-radius:10px}
-.admin button{width:100%;background:#111;color:#FFD700;border:0;padding:14px;border-radius:12px;font-weight:900;margin-top:8px}
-.stats{display:flex;gap:8px}
-.stat-box{flex:1;background:#111;color:#fff;border-radius:12px;padding:12px 6px;text-align:center}
-.stat-box b{display:block;font-size:20px;color:#FFD700}
-.profileBox{background:#fff;margin:10px;border-radius:18px;padding:20px;text-align:center}
-.cart-item{background:#fff;padding:12px;border-radius:12px;margin-bottom:8px;display:flex;justify-content:space-between}
-.cartbar{background:#111;color:#fff;margin:10px;border-radius:14px;padding:14px;display:flex;justify-content:space-between;align-items:center}
-.cartbar button{background:#FFD700;color:#000;border:0;padding:11px 16px;border-radius:20px;font-weight:900}
-.hidden{display:none}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,0.7);display:flex;align-items:flex-end;z-index:300}
-.modalBox{background:#fff;width:100%;border-radius:22px 22px 0 0;padding:16px;max-height:88vh;overflow:auto}
-.modalBox img{width:100%;height:240px;object-fit:cover;border-radius:14px}
-.close-btn{width:100%;background:#111;color:#fff;border:0;padding:12px;border-radius:10px;margin-top:10px;font-weight:800}
-</style>
-</head>
-<body>
-<div class="header"><div class="logo">Sasta <b>Furniture</b><small>Okara - Cheap - Good - Strong</small></div><div class="searchbox"><input id="search" placeholder="Search Sofa, Bed, Table..." oninput="render()"><button onclick="render()">Search</button></div></div>
-<div id="homePage">
-<div class="hero"><h1>🔥 MEGA SALE - Upto 60% OFF</h1><p>Okara's Own Daraz - Order From Home, Delivery At Home</p></div>
-<div class="features"><div class="feature-box">🚚<br>Free Delivery</div><div class="feature-box">💰<br>Cash On Delivery</div><div class="feature-box">🛡️<br>5 Year Warranty</div><div class="feature-box">⭐<br>4.9 Rating</div></div>
-<div style="padding:12px 12px 2px 12px"><h3>Shop By Category</h3></div><div class="cats" id="cats"></div>
-<div style="padding:12px 12px 2px 12px"><h3>🔥 Hot Deals Today</h3></div>
-<div class="controls"><select id="sort" onchange="render()"><option value="">Newest First</option><option value="low">Price Low to High</option><option value="high">Price High to Low</option></select><select id="cityFilter" onchange="render()"><option value="">All Pakistan</option><option>Okara</option><option>Lahore</option><option>Sahiwal</option><option>Depalpur</option></select></div>
-<div class="grid" id="grid"></div>
-<div style="padding:0 10px;text-align:center;color:#888">Sasta Furniture - Main Bazar Okara<br>WhatsApp: 03104559318</div>
-</div>
-<div id="shopPage" class="hidden"><h2 style="padding:14px">🛍️ Shop - All Products</h2><div class="grid" id="grid2"></div></div>
-<div id="cartPage" class="hidden"><h2 style="padding:14px">🛒 My Cart</h2><div id="cartList" style="padding:0 10px"></div><div class="cartbar"><span id="cartText">Cart is empty</span><button onclick="orderWhatsApp()">Order on WhatsApp</button></div></div>
-<div id="profilePage" class="hidden"><div class="profileBox"><div style="font-size:50px">👤</div><h2>Hamza - Customer</h2><p>Name: Hamza</p><p>City: Okara</p><p>Phone: 03104559318</p><p>Orders: <span id="profileOrders">0</span></p><br><button onclick="showPage('cart')" style="background:#111;color:#FFD700;border:0;padding:12px;border-radius:10px;font-weight:800;width:100%">My Cart</button><br><br><button onclick="askCode()" style="background:#FFD700;color:#000;border:0;padding:12px;border-radius:10px;font-weight:800;width:100%">Open Admin Panel 🔐</button></div></div>
-<div id="adminPage" class="admin hidden"><h2>🔐 Admin Dashboard</h2><p style="color:green;font-weight:700">Welcome Admin! Code is correct.</p><br><div class="stats"><div class="stat-box"><b id="statProducts">0</b><small>Products</small></div><div class="stat-box"><b id="statCart">0</b><small>In Cart</small></div><div class="stat-box"><b id="statSales">0</b><small>Total Sales</small></div></div><div class="admin-card"><h3>➕ Add New Product - All Customers Will See</h3><input id="pName" placeholder="Product Name - Example: New Luxury Sofa"><input id="pPrice" type="number" placeholder="Price - 45000"><input id="pOld" type="number" placeholder="Old Price - 90000"><input id="pImg" placeholder="Image Link"><select id="pCat"><option>Sofa</option><option>Bed</option><option>Table</option><option>Chair</option><option>Almari</option><option>Dressing</option></select><input id="pCity" placeholder="City - Okara"><textarea id="pDesc" placeholder="Description - Solid wood, 5 year warranty"></textarea><button onclick="addProduct()">✅ Add Product - Show To All</button></div><div class="admin-card"><h3>🔑 Change Admin Code</h3><p style="font-size:13px;color:#666">Your code is: Asdfghjkl@Asdfghjkl@# - You can change it here</p><input id="newCode" placeholder="Write New Admin Code Here"><button onclick="changeCode()" style="background:#FFD700;color:#000">Change Code Now</button></div><div class="admin-card"><h3>📦 All Products - Delete</h3><div id="adminList"></div></div><button onclick="showPage('home')" style="background:#555;color:#fff">⬅️ Back To Home</button></div>
-<div class="bottomnav"><button id="navHome" class="active" onclick="showPage('home')"><span>🏠</span>Home</button><button id="navShop" onclick="showPage('shop')"><span>🛍️</span>Shop</button><button id="navCart" onclick="showPage('cart')"><span>🛒</span>Cart (<span id="cartCount">0</span>)</button><button id="navProfile" onclick="showPage('profile')"><span>👤</span>Profile</button><button id="navAdmin" onclick="askCode()"><span>🔐</span>Admin</button></div>
-<div id="modalWrap"></div>
-<script>
-let DB="https://sasta-furniture-275f4-default-rtdb.firebaseio.com/products.json";
-let products=[{name:"New L Shape Luxury Sofa",price:48000,old:110000,cat:"Sofa",city:"Okara",desc:"Solid wood frame, 5 year warranty, best foam",img:"https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=700"},{name:"Royal Double Bed With Side Tables",price:72000,old:145000,cat:"Bed",city:"Okara",desc:"Sheesham wood, box bed, strong and beautiful",img:"https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=700"},{name:"6 Chair Dining Table",price:32000,old:60000,cat:"Table",city:"Lahore",desc:"6 chairs with table, polish finish",img:"https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?w=700"},{name:"Comfort Relax Chair",price:9500,old:18000,cat:"Chair",city:"Okara",desc:"Best for elders, very comfortable",img:"https://images.unsplash.com/photo-1592078615290-033ee584e267?w=700"},{name:"Sliding Almari 3 Door",price:58000,old:105000,cat:"Almari",city:"Sahiwal",desc:"Big almari with mirror, sliding doors",img:"https://images.unsplash.com/photo-1558997519-83ea9252edf4?w=700"},{name:"Dressing Table With Mirror",price:22000,old:40000,cat:"Dressing",city:"Depalpur",desc:"Dressing + 2 drawers, LED mirror",img:"https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?w=700"}];
-let activeCat="All";let cart=[];
-let cats=[{n:"All",i:"🏠"},{n:"Sofa",i:"🛋️"},{n:"Bed",i:"🛏️"},{n:"Table",i:"🍽️"},{n:"Chair",i:"🪑"},{n:"Almari",i:"🚪"},{n:"Dressing",i:"🪞"}];
-function getAdminCode(){let s=localStorage.getItem("adminCode");if(s){return s}return "Asdfghjkl@Asdfghjkl@#"}
-function changeCode(){let n=document.getElementById("newCode").value;if(n===""){alert("Write new code first");return}localStorage.setItem("adminCode",n);alert("Code Changed! New Code is: "+n);document.getElementById("newCode").value=""}
-function askCode(){let c=prompt("Enter Admin Code:");if(c===getAdminCode()){showPage("admin")}else{if(c!==null){alert("Wrong Code!")}}}
-function showPage(page){document.getElementById("homePage").classList.add("hidden");document.getElementById("shopPage").classList.add("hidden");document.getElementById("cartPage").classList.add("hidden");document.getElementById("profilePage").classList.add("hidden");document.getElementById("adminPage").classList.add("hidden");let b=document.querySelectorAll(".bottomnav button");for(let i=0;i<b.length;i++){b[i].classList.remove("active")}if(page==="home"){document.getElementById("homePage").classList.remove("hidden");document.getElementById("navHome").classList.add("active")}if(page==="shop"){document.getElementById("shopPage").classList.remove("hidden");document.getElementById("navShop").classList.add("active")}if(page==="cart"){document.getElementById("cartPage").classList.remove("hidden");document.getElementById("navCart").classList.add("active");renderCart()}if(page==="profile"){document.getElementById("profilePage").classList.remove("hidden");document.getElementById("navProfile").classList.add("active")}if(page==="admin"){document.getElementById("adminPage").classList.remove("hidden");document.getElementById("navAdmin").classList.add("active")}}
-function drawCats(){let h="";for(let i=0;i<cats.length;i++){let c=cats[i];let cls="";if(c.n===activeCat){cls="active"}h+='<div class="catbox '+cls+'" onclick="setCat(\''+c.n+'\')"><div style="font-size:26px">'+c.i+'</div><p>'+c.n+'</p></div>'}document.getElementById("cats").innerHTML=h}
-function setCat(c){activeCat=c;drawCats();render()}
-function render(){let q=document.getElementById("search").value.toLowerCase();let s=document.getElementById("sort").value;let city=document.getElementById("cityFilter").value;let list=[];for(let i=0;i<products.length;i++){let p=products[i];let catOk=false;if(activeCat==="All"){catOk=true}if(p.cat===activeCat){catOk=true}let searchOk=p.name.toLowerCase().includes(q);let cityOk=true;if(city!==""){if(p.city!==city){cityOk=false}}if(catOk&&searchOk&&cityOk){list.push(p)}}if(s==="low"){list.sort(function(a,b){return a.price-b.price})}if(s==="high"){list.sort(function(a,b){return b.price-a.price})}let g="";for(let i=0;i<list.length;i++){let p=list[i];let idx=products.indexOf(p);let off=Math.round((1-p.price/p.old)*100);g+='<div class="card"><span class="badge-off">-'+off+'% OFF</span><img src="'+p.img+'" onclick="openDetail('+idx+')"><div class="body"><h3>'+p.name+'</h3><div class="stars">⭐⭐⭐⭐⭐ (4.9)</div><div style="font-size:11px;color:#777">📍 '+p.city+' • '+p.cat+'</div><div class="price">Rs.'+p.price.toLocaleString()+' <small>Rs.'+p.old.toLocaleString()+'</small></div><div class="btnrow"><button class="btn1" onclick="addToCart('+idx+')">+ Cart</button><button class="btn2" onclick="buyOne(\''+p.name+'\','+p.price+')">WhatsApp</button></div><button class="detail-btn" onclick="openDetail('+idx+')">👁️ View Details</button></div></div>'}if(g===""){g="<p style='grid-column:span 2;text-align:center;padding:25px'>No product found</p>"}document.getElementById("grid").innerHTML=g;document.getElementById("grid2").innerHTML=g;document.getElementById("statProducts").innerText=products.length;let ah="";for(let i=0;i<products.length;i++){ah+='<div style="background:#f8f8f8;padding:10px;border-radius:10px;margin:8px 0;display:flex;justify-content:space-between"><span>'+products[i].name+' - Rs.'+products[i].price+'</span><button onclick="delProduct('+i+')" style="background:#ff3b30;color:#fff;border:0;padding:7px 12px;border-radius:8px;width:auto;margin:0">Delete</button></div>'}document.getElementById("adminList").innerHTML=ah}
-function openDetail(i){let p=products[i];let h="";h+='<div class="modal"><div class="modalBox"><img src="'+p.img+'"><h2 style="margin:10px 0">'+p.name+'</h2><p style="color:#FFA500">⭐⭐⭐⭐⭐ 4.9 (120 Reviews)</p><p style="color:#666;line-height:22px;margin-top:6px">'+p.desc+'</p><p style="margin-top:6px">📍 City: '+p.city+' • Category: '+p.cat+'</p><p style="margin-top:6px">🚚 Delivery: Free in Okara • 2-3 Days</p><div style="font-size:22px;font-weight:900;margin:10px 0">Rs.'+p.price.toLocaleString()+' <span style="color:#999;text-decoration:line-through;font-size:14px">Rs.'+p.old.toLocaleString()+'</span></div><div class="btnrow"><button class="btn1" onclick="addToCart('+i+');closeModal()">+ Add To Cart</button><button class="btn2" onclick="buyOne(\''+p.name+'\','+p.price+')">WhatsApp Order</button></div><button class="close-btn" onclick="closeModal()">Close</button></div></div>';document.getElementById("modalWrap").innerHTML=h}
-function closeModal(){document.getElementById("modalWrap").innerHTML=""}
-function addToCart(i){cart.push(products[i]);updateCart();alert("✅ Added to Cart!")}
-function updateCart(){document.getElementById("cartCount").innerText=cart.length;let t=0;for(let i=0;i<cart.length;i++){t=t+cart[i].price}document.getElementById("statCart").innerText=cart.length;document.getElementById("statSales").innerText=t.toLocaleString();document.getElementById("profileOrders").innerText=cart.length;if(cart.length>0){document.getElementById("cartText").innerText="🛒 "+cart.length+" items - Rs."+t.toLocaleString()}else{document.getElementById("cartText").innerText="Cart is empty"}}
-function renderCart(){let h="";if(cart.length===0){h="<p style='text-align:center;padding:20px'>Cart is empty</p>"}else{for(let i=0;i<cart.length;i++){h+='<div class="cart-item"><span>'+cart[i].name+'</span><b>Rs.'+cart[i].price.toLocaleString()+'</b></div>'}}document.getElementById("cartList").innerHTML=h;updateCart()}
-function buyOne(n,p){let t="Hello Sasta Furniture, I want this: "+n+" - Rs."+p;window.open("https://wa.me/923104559318?text="+encodeURIComponent(t),"_blank")}
-function orderWhatsApp(){if(cart.length===0){alert("First add something in cart");return}let m="🛋️ New Order - Sasta Furniture:\n\n";for(let i=0;i<cart.length;i++){m+="• "+cart[i].name+" - Rs."+cart[i].price+"\n"}let total=0;for(let i=0;i<cart.length;i++){total=total+cart[i].price}m+="\nTotal: Rs."+total;window.open("https://wa.me/923104559318?text="+encodeURIComponent(m),"_blank")}
-function addProduct(){let n=document.getElementById("pName").value;let p=document.getElementById("pPrice").value;if(n===""||p===""){alert("Please write Name and Price");return}let o=document.getElementById("pOld").value;if(o===""){o=p*2}let img=document.getElementById("pImg").value;if(img===""){img="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=700"}let city=document.getElementById("pCity").value;if(city===""){city="Okara"}let desc=document.getElementById("pDesc").value;if(desc===""){desc="Good quality furniture, strong and beautiful"}let np={name:n,price:Number(p),old:Number(o),cat:document.getElementById("pCat").value,city:city,desc:desc,img:img};products.unshift(np);fetch(DB,{method:"POST",body:JSON.stringify(np)});alert("✅ Done! Now ALL customers will see this product.");showPage("home");render()}
-function delProduct(i){if(confirm("Delete this product?")){products.splice(i,1);render()}}
-fetch(DB).then(function(r){return r.json()}).then(function(d){if(d){let a=Object.values(d);if(a.length>0){products=a;render()}}});
-drawCats();render();
-</script>
-</body>
-</html>
+body{background:#f5f5f5}
+header{background:#2c3e50;color:#fff;padding:15px;text-align:center;position:sticky;top:0;z-index:99}
+header h1{font-size:22px}
+.top-btns{display:flex;gap:10px;padding:10px}
+.top-btns button{flex:1;padding:12px;border:none;border-radius:10px;font-size:15px;font-weight:bold;cursor:pointer}
+.btn-admin{background:#e67e22;color:#fff}
+.btn-wa{background:#25D366;color:#fff}
+#products{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:12px}
+.card{background:#fff;border-radius:15px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.1)}
+.card img{width:100%;height:150px;object-fit:cover}
+.card-body{padding:10px}
+.card-body h3{font-size:15px}
+.price{color:#e67e22;font-weight:bold;font-size:16px;margin-top:4px}
+.card-body button{width:100%;margin-top:8px;padding:10px;background:#25D366;color:#fff;border:none;border-radius:8px;font-weight:bold;cursor:pointer}
+#adminLogin,#adminPanel{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:999;overflow-y:auto;padding:15px}
+.box{background:#fff;border-radius:15px;padding:20px;max-width:450px;margin:20px auto}
+.box h2{text-align:center;margin-bottom:15px}
+.box input,.box textarea{width:100%;padding:12px;margin-bottom:10px;border:1px solid #ddd;border-radius:10px;font-size:15px}
+.box button{
