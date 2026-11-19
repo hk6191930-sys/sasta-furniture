@@ -9,7 +9,7 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
 body{background:#f5f5f5}
-header{background:#2c3e50;color:#fff;padding:15px;text-align:center;position:sticky;top:0;z-index:99}
+header{background:#2c3e50;color:#fff;padding:15px;text-align:center}
 header h1{font-size:22px}
 .top-btns{display:flex;gap:10px;padding:10px}
 .top-btns button{flex:1;padding:12px;border:none;border-radius:10px;font-size:15px;font-weight:bold;cursor:pointer}
@@ -26,4 +26,212 @@ header h1{font-size:22px}
 .box{background:#fff;border-radius:15px;padding:20px;max-width:450px;margin:20px auto}
 .box h2{text-align:center;margin-bottom:15px}
 .box input,.box textarea{width:100%;padding:12px;margin-bottom:10px;border:1px solid #ddd;border-radius:10px;font-size:15px}
-.box button{
+.box button{width:100%;padding:13px;border:none;border-radius:10px;font-weight:bold;cursor:pointer;margin-bottom:8px;font-size:15px}
+.btn-save{background:#27ae60;color:#fff}
+.btn-close{background:#999;color:#fff}
+.admin-item{display:flex;gap:10px;align-items:center;background:#f9f9f9;padding:8px;border-radius:10px;margin-bottom:8px}
+.admin-item img{width:60px;height:60px;object-fit:cover;border-radius:8px}
+.admin-item b{flex:1;font-size:13px}
+.btn-del{background:#e74c3c!important;color:#fff!important;width:70px!important;padding:8px!important}
+.empty{text-align:center;padding:40px;color:#888;grid-column:1/3}
+</style>
+</head>
+<body>
+
+<header>
+<h1>🛋️ Sasta Furniture</h1>
+<p>Dera Ghazi Khan | Cash on Delivery</p>
+</header>
+
+<div class="top-btns">
+<button class="btn-wa" onclick="openWA()">📱 WhatsApp Order</button>
+<button class="btn-admin" onclick="showLogin()">⚙️ Admin Panel</button>
+</div>
+
+<div id="products"></div>
+
+<div id="adminLogin">
+<div class="box">
+<h2>Admin Login</h2>
+<input type="password" id="passInput" placeholder="Password likhein">
+<button class="btn-save" onclick="checkPass()">Login</button>
+<button class="btn-close" onclick="closeAll()">Band Karein</button>
+</div>
+</div>
+
+<div id="adminPanel">
+<div class="box">
+<h2>Admin Panel</h2>
+<input type="text" id="pName" placeholder="Product ka Naam">
+<input type="number" id="pPrice" placeholder="Price - Jese: 25000">
+<input type="text" id="pImg" placeholder="Photo ka Link">
+<textarea id="pDesc" placeholder="Detail likhein"></textarea>
+<button class="btn-save" onclick="addProduct()">+ Product Add Karein</button>
+<hr style="margin:12px 0">
+<h3 style="margin-bottom:10px">Sab Products</h3>
+<div id="adminList"></div>
+<button class="btn-close" onclick="closeAll()">Panel Band Karein</button>
+<button style="background:#e74c3c;color:#fff" onclick="deleteAll()">⚠️ Sare Delete Karein</button>
+</div>
+</div>
+
+<script>
+const WA_NUMBER = "923104559318";
+const ADMIN_PASS = "Asdfghjkl@Asdfghjkl@#";
+
+// ===== APNA CONFIG YAHAN LAGAO - Agar nahi lagaya to bhi website khulegi =====
+const firebaseConfig = {
+  apiKey: "YAHAN-API-KEY",
+  authDomain: "YAHAN-AUTH-DOMAIN",
+  databaseURL: "YAHAN-DATABASE-URL",
+  projectId: "YAHAN-PROJECT-ID",
+  storageBucket: "YAHAN-STORAGE",
+  messagingSenderId: "YAHAN-SENDER-ID",
+  appId: "YAHAN-APP-ID"
+};
+
+let useFirebase = false;
+let productsRef = null;
+let products = [];
+
+// Firebase lagane ki koshish karo, agar fail ho to website ko band mat karo
+try{
+  if(firebaseConfig.apiKey !== "YAHAN-API-KEY" && firebaseConfig.databaseURL.includes("http")){
+    firebase.initializeApp(firebaseConfig);
+    productsRef = firebase.database().ref('products');
+    useFirebase = true;
+    console.log("Firebase ON - Sab ko show hoga");
+  } else {
+    console.log("Firebase OFF - Local mode");
+  }
+}catch(e){
+  useFirebase = false;
+  console.log("Firebase error, local mode par chal raha hai");
+}
+
+// Agar Firebase OFF hai to Local se load karo
+if(!useFirebase){
+  let saved = localStorage.getItem('sasta_products');
+  if(saved){
+    products = JSON.parse(saved);
+  } else {
+    products = [
+      {id:1, name:"Luxury Sofa Set", price:45000, img:"https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=500", desc:"5 Seater Sofa, Best Quality"},
+      {id:2, name:"Wooden Bed", price:35000, img:"https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=500", desc:"Solid Wood Double Bed"}
+    ];
+  }
+  renderProducts();
+  renderAdminList();
+}
+
+// Agar Firebase ON hai to Live suno
+if(useFirebase){
+  productsRef.on('value', (snapshot) => {
+    let data = snapshot.val();
+    products = [];
+    if(data){
+      for(let key in data){ products.push({key:key, ...data[key]}); }
+    }
+    renderProducts();
+    renderAdminList();
+  });
+}
+
+function saveLocal(){
+  localStorage.setItem('sasta_products', JSON.stringify(products));
+}
+
+function renderProducts(){
+  let box = document.getElementById('products');
+  if(!box) return;
+  if(products.length === 0){
+    box.innerHTML = '<div class="empty"><h3>Abhi koi product nahi hai</h3></div>';
+    return;
+  }
+  box.innerHTML = products.map(p => `
+    <div class="card">
+      <img src="${p.img}" onerror="this.src='https://via.placeholder.com/300'">
+      <div class="card-body">
+        <h3>${p.name}</h3>
+        <div class="price">Rs. ${p.price}</div>
+        <p style="font-size:12px;color:#777;margin-top:4px">${p.desc||''}</p>
+        <button onclick="orderOne('${p.name}', ${p.price})">WhatsApp Par Order Karein</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderAdminList(){
+  let list = document.getElementById('adminList');
+  if(!list) return;
+  if(products.length === 0){ list.innerHTML = '<p>koi product nahi hai</p>'; return; }
+  list.innerHTML = products.map(p => `
+    <div class="admin-item">
+      <img src="${p.img}" onerror="this.src='https://via.placeholder.com/100'">
+      <b>${p.name}<br><span style="color:#e67e22">Rs. ${p.price}</span></b>
+      <button class="btn-del" onclick="delProduct('${p.key || p.id}')">Delete</button>
+    </div>
+  `).join('');
+}
+
+function addProduct(){
+  let name = document.getElementById('pName').value.trim();
+  let price = document.getElementById('pPrice').value.trim();
+  let img = document.getElementById('pImg').value.trim();
+  let desc = document.getElementById('pDesc').value.trim();
+  if(!name || !price){ alert("Naam aur Price zaroor likhein"); return; }
+  if(!img) img = "https://via.placeholder.com/300";
+  if(useFirebase){
+    productsRef.push({name:name, price:price, img:img, desc:desc});
+  } else {
+    products.push({id: Date.now(), name:name, price:price, img:img, desc:desc});
+    saveLocal(); renderProducts(); renderAdminList();
+  }
+  document.getElementById('pName').value='';
+  document.getElementById('pPrice').value='';
+  document.getElementById('pImg').value='';
+  document.getElementById('pDesc').value='';
+  alert("Product Add Ho Gaya!");
+}
+
+function delProduct(key){
+  if(!confirm("Pakka delete karna hai?")) return;
+  if(useFirebase){
+    productsRef.child(key).remove();
+  } else {
+    products = products.filter(p => String(p.id) !== String(key));
+    saveLocal(); renderProducts(); renderAdminList();
+  }
+  alert("Pakka Delete Ho Gaya!");
+}
+
+function deleteAll(){
+  if(!confirm("Sare delete karne hain?")) return;
+  if(useFirebase){ productsRef.remove(); }
+  else { products=[]; saveLocal(); renderProducts(); renderAdminList(); }
+  alert("Sare Delete Ho Gaye!");
+}
+
+function showLogin(){ document.getElementById('adminLogin').style.display='block'; }
+function closeAll(){
+  document.getElementById('adminLogin').style.display='none';
+  document.getElementById('adminPanel').style.display='none';
+}
+function checkPass(){
+  let v = document.getElementById('passInput').value;
+  if(v === ADMIN_PASS){
+    document.getElementById('adminLogin').style.display='none';
+    document.getElementById('adminPanel').style.display='block';
+    renderAdminList();
+    document.getElementById('passInput').value='';
+  } else { alert("Password Ghalat Hai!"); }
+}
+function openWA(){
+  window.open("https://wa.me/"+WA_NUMBER+"?text="+encodeURIComponent("Assalam-o-Alaikum! Mujhe Furniture order karna hai."), "_blank");
+}
+function orderOne(name, price){
+  window.open("https://wa.me/"+WA_NUMBER+"?text="+encodeURIComponent("Assalam-o-Alaikum! Mujhe ye order karna hai:\n"+name+"\nPrice: Rs. "+price), "_blank");
+}
+</script>
+</body>
+</html>
